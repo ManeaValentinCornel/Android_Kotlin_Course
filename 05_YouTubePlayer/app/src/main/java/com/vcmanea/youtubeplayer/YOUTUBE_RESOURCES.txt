@@ -1,0 +1,2 @@
+console.developers.google
+https://developers.google.com/youtube/android/player/reference/com/google/android/youtube/player/YouTubeStandalonePlayer
