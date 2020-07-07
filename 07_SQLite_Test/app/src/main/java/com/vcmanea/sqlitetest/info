@@ -1,0 +1,16 @@
+adb devices                        ->  return a list of devices attached.(emulators)
+adb shell                          -> if there is only one device connected
+ls -l                              -> list of files in linux
+
+su                                 -> request super user access, and type ls -l again
+cd data                            -> going to data file, because our database is located there data
+ls -l                              ->list all the files again
+cd data                            ->  readch the data/data
+cd com.vcmanea.sqlitetest          -> go within your package name
+cd databases                        -> go with the database
+sqlite3 sqlite-test-1.db            -> open you sql database
+
+
+-> the journal file is a transaction log, that sqlite uses to handle database transactions.
+-> using transcation log the sqlite can undo all the changes and put the database in the state it was in.
+-> if everything goes well uses journal file to commit the transactions.

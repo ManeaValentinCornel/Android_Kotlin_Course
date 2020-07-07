@@ -1,0 +1,171 @@
+sqlite3 test.db  -> 	create a database
+.quit -> 	quit a database
+.help ->	see list of all the commands
+.backup testbackip	->make a data backup
+.restore testbackup	->restore from the backup
+.tables		-> show all the tables into the databse file
+.schema		-> show de sql commands use to create the tables
+.dump		-> all the command used to create tables and also to populate the tables -> TRANSACTION
+.headers on 	-> header for the fields, columns
+
+
+-----------------------------------------------CREATE----------------------------------------------------------
+CREATE TABLE contacts(name TEXT,phone INTEGER,email TEXT);
+
+-----------------------------------------------DROP TABLE------------------------------------------------------------
+DROP TABLE table_name;
+-----------------------------------------------DROP VIEW------------------------------------------------------------
+DROP VIEW view_name;
+
+-----------------------------------------------INSERT----------------------------------------------------------
+INSERT INTO contacts(name,phone,email) VALUES('Costel',223311,'costel@gmail.com');
+INSERT INTO contacts VALUES('Steve',5552,'gmail.com');
+
+-----------------------------------------------QUERY-----------------------------------------------------------
+SELECT * FROM contacts;
+SELECT name FROM contacts;
+SELECT * FROM contacts WHERE name="Bobo";
+SELECT name,email FROM contacts WHERE name="Bobo"
+-----------------------------------------------UPDATE----------------------------------------------------------
+UPDATE contacts SET email='nama@gmail.com';	-> never do that , or all rows will be updated
+
+----------------------------------------UPDATE WITH WHERE CLAUSE----------------------------------------
+UPDATE contacts SET email='gues@gmail.com' WHERE name='Avril';
+
+
+-----------------------------------------------DELETE----------------------------------------------------
+DELETE FROM contacts;	-> never do that , or all rows will be updated
+DELETE FROM contacts WHERE name="Bobo";
+
+-----------------------------------------------MUSIC TABLE-----------------------------------------------
+
+CREATE TABLE songs (_id PRIMARY KEY, track INTEGER, title TEXT NOT NULL, album INTEGER);
+CREATE TABLE albums(_id PRIMARY KEY,name TEXT NOT NULL,artist INTEGER);
+CREATE TABLE artists(_id PRIMARY KEY, name TEXT NOT NULL):
+
+
+--------------------------------------------ORDER BY CLAUSE------------------------------------
+SELECT * FROM artists ORDER BY name;
+SELECT * FROM albums ORDER BY name;
+
+--------------------------------------------COLLATE NOCASE------------------------------------
+SELECT * FROM songs ORDER BY title COLLATE NOCASE; -> IGONRE THE CASE
+SELECT * FROM songs ORDER BY title COLLATE NOCASE ASC;
+SELECT * FROM artists ORDER BY name,_id COLLATE NOCASE DESC;
+
+------------------------------------------- JOIN TABLES ---------------------------------------
+SELECT songs.track,songs.title,album.name FROM songs INNER JOIN albums ON
+songs.album=albums.id;
+
+-> if no abiguity, you can omit to prefix the field with the tables name
+
+SELECT track,title,name FROM songs INNER JOIN albums ON
+songs.albums=albums.id ORDER BY name COLLATE NOCASE ASC;
+
+-> JOIN is the short hand for the INNER JOIN so -> a verty good habit to alwasys prefix the fields(columns) with the table name
+
+SELECT songs.track,songs.title,albums.name FROM songs JOIN albums ON
+songs.albums=albums._id ORDER BY songs.track COLLATE NOCASE ASC;
+
+-> SELECT artists.name,albums.name,songs.track,songs.title FROM albums INNER JOIN artists ON
+albums.artist=artists._id INNER JOIN songs ON songs.album=albums._id 
+ORDER BY artists.name,albums.name,songs.track,songs.title COLLATE NOCASE ASC;
+
+-------------------------------------------WILD CARDS---------------------------------------
+-> LIKE no case sensitive
+SELECT * FROM songs WJERE title LIKE "doctor";  -> songs which title is doctor, case is ignored
+
+SELECT * FROM songs WHERE title LIKE "%doctor%"; -> List all the songs that contain the word doctor
+
+
+-------------------------------------------CREATE VIEW---------------------------------------
+
+CREATE VIEW arists_list AS
+SELECT artists.name, albumns.name, songs.track, songs.title FROM songs 
+INNER JOIN albums ON songs.album=albums._id INNER JOIN artists ON
+artists._id=album.artists ORDER BY artists.name, albumns.name, songs.track, songs.title;
+
+-------------------------------------------CREATE VIEW with ALIASES---------------------------------------
+CREATE View album_list AS
+SELECT name AS album_name FROM albums;
+
+------------------------------------------- FUNCTIONS ---------------------------------------
+SELECT count(*) FROM albums;
+
+-------------------------------------------CHALLENGE ---------------------------------------
+->Find the title of album 367
+SELECT name FROM albums WHERE _id=367;
+
+->List all the songs so that the songs from the same album appear together in track order
+SELECT * FROM songs ORDER BY album,track COLLATE NOCASE ASC;
+
+-> Produce a list of all artists, whith their albums, in alphabetical order of artist name.
+SELECT artists.name,albums.name FROM artists INNER JOIN albums ON
+artists._id=albums.artist ORDER BY artist.name,album.name COLLATE NOCASE ASC;
+
+-> Select the titles of all the songs on the album 'Forbidden'
+
+SELECT songs.title FROM songs INNER JOIN albums ON
+songs.album=albums._id WHERE albums.name='Forbidden';
+
+-->Repeat the previous query but this time display the songs in track order.
+ You may want ti onclude the track number in the output to verify that it worked ok.
+
+SELECT songs.track,songs.title FROm songs INNER JOIN albums ON
+songs.album=albums._id WHERE albums.name='Forbidden' ORDER BY songs.track,songs.title COLLATE NOCASE ASC;
+
+--> Display all songs for the band 'Deep Purple'
+
+SELECT songs.track,songs.title FROM songs INNER JOIN albums ON
+songs.album=albums._id INNER JOIN artists ON
+albums.artist=artists._id WHERE artists.name='Deep Purple' ORDER BY songs.track;
+
+->Rename the band 'Mehitabel' to 'One Kitten;. Note that this is an exception to the advice th always fully qualify yout column names.SERT. artists.name won.t work;
+
+
+UPDATE artists SET name='One kitten' WHERE name='Mehitabel';
+
+-> SELECT the titles of all the songs by Aerosmith in alphabetical order.
+Include only the title in the output.
+
+SELECT songs.title FROM songs INNER JOIN albums ON
+albums._id=songs.album INNER JOIN albums.artist=artists._id 
+WHERE artists.name LIKE '%Aerosmith%' ORDER BY songs.title COLLATE NOCASE ASC;
+
+-> Replace the column that you used  in the previous answer wotj count(title) 
+to get just a count of the numbe rof songs
+
+SELECT count(songs.title) FROM songs INNER JOIN albums ON songs.album=albums._id INNER JOIN artists ON albums.artist=artists._id WHERE artists.name LIKE '%Aerosmith%' ;
+
+-> SEARCH the internet to find out how to get a list of the songs from step 6 without any duplicates;
+
+sqlite> SELECT DISTINCT count(*) FROM songs;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
