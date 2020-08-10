@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragments.addEditFragment.AddEditFragment">
+
+    <EditText
+        android:id="@+id/addEditName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/addedit_name_hint"
+        android:inputType="textNoSuggestions"
+        android:maxLength="64" />
+
+    <EditText
+        android:id="@+id/addEditDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/add_edit_desciption_hint"
+        android:inputType="textMultiLine"
+       android:maxLength="256" />
+
+    <EditText
+        android:id="@+id/addEditSortOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/add_edit_sort"
+        android:inputType="number"
+        android:maxLength="9"/>
+
+    <Button
+        android:id="@+id/addEditBtnSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:drawableStart="@android:drawable/ic_menu_save"
+        android:drawablePadding="8dp"
+        android:text="@string/addEditBtnSave" />
+</LinearLayout>

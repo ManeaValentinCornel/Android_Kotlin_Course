@@ -1,0 +1,17 @@
+in Linux kernel forward slashes / instead of backwards slashed for the files path
+adb devices
+adb shell   -> only 1 device
+adb -s emular-5554 shell  -> for more than 1 device
+su    -> grant root access
+ls -l       -> show the folders
+cd data/data/com.vcmanea.a11_tasktimer_app/databases -> reach the app folder
+sqlite3 TaskTimer.db    -> open the database
+.schema -> show the tables after is just sql
+adb shell setprop log.tag.SQLiteQueryBuilder DEBUG          ->      DEBUG LOG WITH THE SqLiteQuierbyBuilder class -> activate the LOGS
+
+
+
+
+
+
+

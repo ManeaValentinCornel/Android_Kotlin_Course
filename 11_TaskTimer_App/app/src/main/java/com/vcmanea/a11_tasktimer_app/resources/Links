@@ -1,0 +1,5 @@
+Links
+UriMatcher ->  https://developer.android.com/reference/android/content/UriMatcher
+ContentProvide ->   https://developer.android.com/guide/topics/providers/content-provider-creating#content-uri-patterns
+MIME -> https://developer.android.com/reference/android/content/ContentProvider#getType(android.net.Uri)
+LIFCYCLE FRAGMENTS  -> https://github.com/xxv/android-lifecycle
